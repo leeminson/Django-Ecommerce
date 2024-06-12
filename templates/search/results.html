@@ -1,0 +1,25 @@
+{% extends 'common.html' %}
+{% load static %}
+{% block content %}
+<h1>Search Results for: '{{ q }}'</h1>
+	<div class="row">
+
+		{% for product in results %}
+		<div class="col-lg-4">
+			<img class="thumbnail" src="{{product.img.url}}">
+			<div class="box-element product">
+				<h6><strong>{{product.name}}</strong></h6>
+				<hr>
+				<button data-product="{{product.id}}" data-action="add" data-quantity="1" class="btn btn-outline-secondary add-btn update-cart" value="{{product.slug}}">Add to Cart</button>
+				<a class="btn btn-outline-success" href="{% url 'product-detail' product.slug %}">View</a>
+				<h4 style="display: inline-block; float: right"><strong>{{product.price}}$</strong></h4>
+			</div>
+		</div>
+		{% empty %}
+ 			No products were found matching those search terms.
+		{% endfor %}
+
+		
+		</div>
+	</div>
+{% endblock content %}
